@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação Mensal dos Coordenadores</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .form-row {
+            display:Flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .campo {
+            flex: 1;
+            max-width: 150px;
+            min-width: 200px;
+        }
+        .campo label {
+            font-weight: bold;
+            margin-bottom: 1px;<!-- espaço entre o container e o nome -->
+        }
+        .campo input {
+            width: auto;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 13px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+            margin-bottom: -10px;
+        }
+        .campo input:focus {
+            border-color: #800101;
+            outline: none;
+            box-shadow: 0 0 5px rgba(128, 1, 1, 0.5);
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .container-interno {
+            background: white(255, 255, 255);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            max-width: 600px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .container-interno p {
+            margin-top: 1px;
+            text-align: justify;            
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 20px; <!-- espaço do questionamentos e botoes; -->
+        }
+        .rating {
+            display: flex;
+            gap: 10px;
+            margin: 5px 0;
+        }
+        .rating input {
+            display: none;
+        }
+        .rating label {
+            background: #ddd;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            width: 30px;
+            margin-top: -10px;
+        }
+        .rating label:hover {
+            background: #800101;
+            color: #fff;
+        }
+        .rating input:checked + label {
+            background: #800101;
+            color: white;
+        }
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            max-width: 540px;
+            min-width: 100px;
+            text-align: justify;
+        }
+        button {
+            background: #800101;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #28a745;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Formulário de Avaliação Mensal</h2>
+   <div class= "form-row">
+     <div class="campo">
+        <label for="coordenador">Coordenador Avaliado:</label>
+        <input type="text" id="coordenador" placeholder="Nome do Coordenador">
+     </div>
+
+     <div class="campo">
+        <label for="mes">Período (Mês/Ano):</label>
+        <input type="text" id="mes" placeholder="MM/AAAA">
+     </div>
+   </div>
+      
+
+<div class= "container-interno">
+    <h3>Instruções:</h3>
+<p>Avalie o desempenho do coordenador em relação aos seguintes critérios. Marque a nota de 1 a 5, sendo <strong>1 "Muito insatisfatório"</strong>  e <strong>5 "Excelente"</strong>. Após a avaliação, adicione observações sobre pontos fortes e áreas de melhoria</p>
+
+<div class="conteiner"> 
+   
+    <h4>Avaliação</h4>
+
+    <!-- Questões com botões de rádio -->
+    <label>1. Precisão nos pedidos de suprimentos:</label>
+    <p>(O coordenador solicitou a quantidade correta de itens, sem excesso ou falta?)</p>
+    <div class="rating">
+        <input type="radio" name="q1" value="1" id="q1_1"><label for="q1_1">1</label>
+        <input type="radio" name="q1" value="2" id="q1_2"><label for="q1_2">2</label>
+        <input type="radio" name="q1" value="3" id="q1_3"><label for="q1_3">3</label>
+        <input type="radio" name="q1" value="4" id="q1_4"><label for="q1_4">4</label>
+        <input type="radio" name="q1" value="5" id="q1_5"><label for="q1_5">5</label>
+    </div>
+
+    <label>2. Comunicação com a equipe de suprimentos:</label>
+    <p>(O coordenador manteve boa comunicação sobre as necessidades de materiais?)</p>
+    <div class="rating">
+        <input type="radio" name="q2" value="1" id="q2_1"><label for="q2_1">1</label>
+        <input type="radio" name="q2" value="2" id="q2_2"><label for="q2_2">2</label>
+        <input type="radio" name="q2" value="3" id="q2_3"><label for="q2_3">3</label>
+        <input type="radio" name="q2" value="4" id="q2_4"><label for="q2_4">4</label>
+        <input type="radio" name="q2" value="5" id="q2_5"><label for="q2_5">5</label>
+    </div>
+
+    <label>3. Aderência aos prazos de solicitação:</label>
+    <p>(Os pedidos foram feitos dentro do prazo estabelecido?)</p>
+    <div class="rating">
+        <input type="radio" name="q3" value="1" id="q3_1"><label for="q3_1">1</label>
+        <input type="radio" name="q3" value="2" id="q3_2"><label for="q3_2">2</label>
+        <input type="radio" name="q3" value="3" id="q3_3"><label for="q3_3">3</label>
+        <input type="radio" name="q3" value="4" id="q3_4"><label for="q3_4">4</label>
+        <input type="radio" name="q3" value="5" id="q3_5"><label for="q3_5">5</label>
+    </div>
+
+    <label>4. Controle de estoque (precisão e organização)</label>
+    <p>(O coordenador garantiu que o estoque fosse atualizado corretamente, sem erros de contagem?)</p>
+    <div class="rating">
+        <input type="radio" name="q4" value="1" id="q4_1"><label for="q4_1">1</label>
+        <input type="radio" name="q4" value="2" id="q4_2"><label for="q4_2">2</label>
+        <input type="radio" name="q4" value="3" id="q4_3"><label for="q4_3">3</label>
+        <input type="radio" name="q4" value="4" id="q4_4"><label for="q4_4">4</label>
+        <input type="radio" name="q4" value="5" id="q4_5"><label for="q4_5">5</label>
+    </div>
+
+    <label>5. Responsabilidade e comprometimento com a melhoria do processo:</label>
+    <p>(O coordenador está disposto a melhorar e corrigir erros passados? Ele/ela se envolve ativamente para evitar falhas?)</p>
+    <div class="rating">
+        <input type="radio" name="q5" value="1" id="q5_1"><label for="q5_1">1</label>
+        <input type="radio" name="q5" value="2" id="q5_2"><label for="q5_2">2</label>
+        <input type="radio" name="q5" value="3" id="q5_3"><label for="q5_3">3</label>
+        <input type="radio" name="q5" value="4" id="q5_4"><label for="q5_4">4</label>
+        <input type="radio" name="q5" value="5" id="q5_5"><label for="q5_5">5</label>
+    </div>
+
+    <label>6. Proatividade na identificação de necessidades:</label>
+    <p>(O coordenador consegue identificar as necessidades de forma antecipada ou se limita a pedir quando algo está em falta?)</p>
+    <div class="rating">
+        <input type="radio" name="q6" value="1" id="q6_1"><label for="q6_1">1</label>
+        <input type="radio" name="q6" value="2" id="q6_2"><label for="q6_2">2</label>
+        <input type="radio" name="q6" value="3" id="q6_3"><label for="q6_3">3</label>
+        <input type="radio" name="q6" value="4" id="q6_4"><label for="q6_4">4</label>
+        <input type="radio" name="q6" value="5" id="q6_5"><label for="q6_5">5</label>
+    </div>
+
+    <label for="feedback">Feedback Aberto:</label>
+    <textarea id="feedback" rows="4" placeholder="Escreva aqui suas observações..."></textarea>
+
+    <button onclick="gerarPDF()">Gerar Relatório PDF</button>
+</div>
+
+<script>
+function gerarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const coordenador = document.getElementById("coordenador").value;
+    const mes = document.getElementById("mes").value;
+
+    function getNota(name) {
+        const radios = document.getElementsByName(name);
+        for (let radio of radios) {
+            if (radio.checked) return parseInt(radio.value);
+        }
+        return 0;
+    }
+
+    const q1 = getNota("q1");
+    const q2 = getNota("q2");
+    const q3 = getNota("q3");
+    const q4 = getNota("q4");
+    const q5 = getNota("q5");
+    const q6 = getNota("q6");
+
+    const total = q1 + q2 + q3 + q4 + q5 + q6;
+    const maximo = 30;
+   
+    const feedback = document.getElementById("feedback").value;
+
+    doc.setFont("helvetica", "bold");
+    doc.text(`Relatório de Avaliação Mensal`, 20, 20);
+    doc.setFont("helvetica", "normal");
+
+    doc.text(`Coordenador Avaliado: ${coordenador}`, 20, 30);
+    doc.text(`Período: ${mes}`, 20, 40);
+
+    doc.text(`Avaliação:`, 20, 50);
+    doc.text(`1. Precisão nos pedidos: ${q1}`, 20, 60);
+    doc.text(`2. Comunicação: ${q2}`, 20,70);
+    doc.text(`3. Prazo: ${q3}`, 20,80);
+    doc.text(`4. Controle de estoque: ${q4}`, 20, 90);
+    doc.text(`5. Comprometimento: ${q5}`, 20, 100);
+    doc.text(`6. Proatividade: ${q6}`, 20, 110);
+
+    doc.setFont("helvetica", "bold");
+    doc.text(`Pontuação Total: ${total}/${maximo}`, 20, 120);
+    doc.setFont("helvetica", "normal");
+
+    doc.setFont("helvetica", "bold");
+    doc.text(`Feedback Aberto:`, 20, 130);
+    doc.setFont("helvetica", "normal");
+    doc.text(feedback, 20, 140, { maxWidth: 180 });
+
+    // Usando a abordagem para garantir o clique em desktops também
+    const filename = `Avaliacao_${coordenador}.pdf`;
+    const dataUri = doc.output('datauristring');
+
+    const link = document.createElement('a');
+    link.href = dataUri;
+    link.download = filename;
+
+    // Simula o clique do link
+    link.click();
+}
+
+</script>
+
+</body>
+</html>
